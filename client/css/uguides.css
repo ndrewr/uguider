@@ -1,0 +1,120 @@
+/* CSS declarations go here */
+.u-blue {
+	background-color: #294860;
+}
+
+.u-orange {
+	background-color: #F08C35;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+header, footer {
+	width: 100%;
+	background-color: #294860;
+	color: aliceblue;
+}
+
+header {
+/*	padding: .5em;*/
+	text-align: center;
+}
+
+header h2 {
+	margin: 0em;
+	padding: .5em;
+}
+
+header h2 span {
+	font-weight: 300;
+}
+
+footer {
+
+}
+
+a {
+	text-decoration: none;
+}
+
+a {color:	#294860;}      /* unvisited link */
+a:visited {color:#888;}  /* visited link */
+a:hover {color:#FF00FF;}  /* mouse over link */
+a:active {color:#F08C35;}
+
+.main-container {
+	width: 100%;
+
+}
+
+.post-list {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 1em;
+}
+
+.post {
+	width: 80%;
+	position: relative;
+	margin: 0 auto;
+	margin-bottom: .5em;
+	padding: 1em;
+	border: 1px solid #294860;
+
+}
+
+.post__clicks {
+	position: absolute;
+	box-sizing: border-box;
+	height: 100%;
+	width: 6em;
+	left: 0;
+	top: 0;
+	font-size: .5em;
+	padding: .5em;
+	text-align: center;
+	color: aliceblue;
+
+}
+
+.post__clicks-count {
+	font-size: 4em;
+}
+
+.post__title {
+	font-size: 1.2em;
+	color: #294860;
+	width: 90%;
+	margin-left: 4em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.post__info {
+
+}
+
+.post__info-sig {
+	position: absolute;
+	right: 1em;
+	bottom: 0;
+	font-size: .8em;
+	padding-bottom: .5em;
+}
+
+.post__info-sig span {
+	position: absolute;
+
+}
+
+.post__source {
+	position: absolute;
+	padding: .2em;
+	top: 0;
+	right: 0;
+	font-size: 1.1em;
+}

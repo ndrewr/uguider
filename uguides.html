@@ -1,0 +1,50 @@
+<head>
+	<title>U-Guider</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<header>
+		<h2>UDACITY <span>guides</span></h2>
+	</header>
+
+	<section class="main-container">
+
+		{{> post_list}}
+
+
+<!--		{{> hello}}-->
+	</section>
+
+	<footer></footer>
+
+</body>
+
+<template name="post_list">
+	<div class="post-list">
+		{{#each post}}
+			<div class="post">
+				<span class="post__source">{{source}}</span>
+				<div class="post__clicks {{#if clicks}} u-blue {{else}} u-orange {{/if}}">
+					<span class="post__clicks-count">
+						{{clicks}}
+					</span>
+					<p>{{#if oneClickLabel}} CLICK {{else}} CLICKS {{/if}}</p>
+				</div>
+				<div class="post__info">
+					<h3 class="post__title">
+						<a href="{{url}}" target="_blank">{{title}}</a>
+					</h3>
+					<span class="post__info-sig">added {{date_added}} by {{created_by}}</span>
+				</div>
+			</div>
+		{{/each}}
+	</div>
+</template>
+
+<!--
+<template name="hello">
+	<button>Click Me</button>
+	<p>You've pressed the button {{counter}} times.</p>
+</template>
+-->
