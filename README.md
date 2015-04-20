@@ -1,7 +1,6 @@
 #U-Guider
 ===============================================================
 Aggregates links from various sources based on configured criteria.
-Currently configured to search for topics about Udacity Nanodegrees.
 
 Each link has an associated Click Counter to alert Users to how many other Users have
 already followed that link. This is meant to free User to visit less trafficked links.
@@ -19,7 +18,21 @@ Currently scrapes Quora with Kimono API with the query:
 udacity+nanodegree&time=month
 
 
-# TODOS
+#How to Run
+===============================================================
+- Install Meteor
+- on CLI:
+	meteor create uguider
+- change to new project directory
+- replace all files in root directory with contents of this repo
+- add required packages
+	meteor add http
+	meteor add momentjs:moment
+- launch on local host:
+	meteor
+
+
+#TODOS
 ===============================================================
 - Sort available links based on...
 	- Dated created?
