@@ -1,0 +1,22 @@
+<template name="lifebar">
+	<div class="post__lifebar">
+<!--		<span class="post__lifebar__label">LIFEBAR</span>-->
+		<button class="post__lifebar__control" data-control="down">
+			<svg class="post__icon icon-decrease"><use xlink:href="#icon-decrease"></use></svg>
+		</button>
+
+		<span class="post__lifebar__unit">
+			<svg class="post__icon icon-heart {{#if firstHeart}}icon-heart-full{{/if}}"><use xlink:href="#icon-heart"></use></svg>
+		</span>
+		<span class="post__lifebar__unit">
+			<svg class="post__icon icon-heart {{#if secondHeart}}icon-heart-full{{/if}}"><use xlink:href="#icon-heart"></use></svg>
+		</span>
+		<span class="post__lifebar__unit">
+			<svg class="post__icon icon-heart {{#if thirdHeart}}icon-heart-full{{/if}}"><use xlink:href="#icon-heart"></use></svg>
+		</span>
+
+		<button class="post__lifebar__control" data-control="up" {{buttonDisable}}>
+			<svg class="post__icon icon-increase"><use xlink:href="#icon-increase"></use></svg>
+		</button>
+	</div>
+</template>

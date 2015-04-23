@@ -1,4 +1,8 @@
 // server.js
+// pubs
+Meteor.publish('links', function (limit) {
+	return Links.find({}, { limit: limit });
+});
 
 var isUniqueResult = function (result, source) {
 	switch (source) {
@@ -41,7 +45,8 @@ var getReddit = function (limit) {
 						reddit_id: reddit_thing.id,
 						date_added: moment(1000 * reddit_thing.created).format('MMMM Do YYYY, h:mm:ss a'),
 						created_by: 'U-Guider',
-						clicks: 0
+						clicks: 0,
+						hp: 2
 					});
 				}
 			});
@@ -69,7 +74,8 @@ var getQuora = function () {
 						source: 'Quora',
 						date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
 						created_by: 'U-Guider',
-						clicks: 0
+						clicks: 0,
+						hp: 2
 					});
 				}
 			});
@@ -108,7 +114,8 @@ Meteor.startup(function () {
 //			source: 'Other',
 //			date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
 //			created_by: 'Andrew R',
-//			clicks: 0
+//			clicks: 0,
+//			hp:3
 //		}),
 //
 //			Links.insert({

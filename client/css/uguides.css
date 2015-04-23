@@ -30,10 +30,11 @@ header h2 {
 
 header h2 span {
 	font-weight: 300;
+	vertical-align: 10px;
 }
 
 footer {
-
+	height: 4em;
 }
 
 a {
@@ -44,6 +45,22 @@ a {color:	#294860;}      /* unvisited link */
 a:visited {color:#888;}  /* visited link */
 a:hover {color:#FF00FF;}  /* mouse over link */
 a:active {color:#F08C35;}
+
+button {
+	background-color: aliceblue;
+	border-radius: 1.5em;
+	border: none;
+}
+button:active {
+	background-color: #F08C35;
+}
+button:disabled {
+	opacity: .3;
+	pointer-events: none;
+}
+button:focus {
+	outline: none;
+}
 
 .main-container {
 	width: 100%;
@@ -112,9 +129,119 @@ a:active {color:#F08C35;}
 }
 
 .post__source {
-	position: absolute;
-	padding: .2em;
+/*	position: absolute;
 	top: 0;
 	right: 0;
-	font-size: 1.1em;
+*/
+
+	float: left;
+	margin-left: 3em;
+/*	padding: .2em;*/
+/*	font-size: 1.1em;*/
+}
+
+#morePostsAvailable {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 2em;
+}
+
+.loading-posts {
+	padding: .5em 1em;
+	background: #888;
+	border-radius: 1em;
+	color: aliceblue;
+	font-weight: 300;
+}
+
+
+.post__icon {
+
+	fill: black;
+	width: 24px;
+	height: 24px;
+}
+
+#icon-reddit .path1 {
+	fill: rgb(225, 88, 75);
+}
+#icon-reddit .path2 {
+	fill: rgb(13, 38, 54);
+}
+
+#icon-quora .path1 {
+	fill: rgb(202, 70, 56);
+}
+#icon-quora .path2 {
+	fill: rgb(255, 255, 255);
+}
+
+.icon-udacity_name {
+	fill: aliceblue;
+	height: 32px;
+	max-width: 140px;
+}
+
+.icon-udacity_u {
+	fill: #F08C35;
+	height: 54px;
+	width: 54px;
+}
+
+.icon-udacity {
+	fill: aliceblue;
+	width: 48px;
+	height: 54px;
+}
+
+#icon-udacity {
+
+}
+#icon-udacity .path1 {
+
+}
+
+#icon-udacity .path2 {
+
+}
+
+.icon-github {
+	width: 44px;
+	height: 44px;
+}
+
+.icon-github2 {
+	width: 44px;
+	height: 44px;
+}
+
+.icon-heart {
+	padding: 4px 0;
+}
+
+.icon-heart-full {
+	fill: red;
+}
+
+.icon-increase, .icon-decrease {
+	height: 32px;
+	width: 32px;
+
+}
+
+.post__lifebar {
+	float: right;
+	font-size: .5em;
+	margin: auto 0;
+}
+
+/*
+.post__lifebar__label {
+
+}
+*/
+
+.post__lifebar__control {
+
 }
