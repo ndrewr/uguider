@@ -7,6 +7,77 @@
 	background-color: #F08C35;
 }
 
+/* svg icon styles */
+#icon-reddit .path1 {
+	fill: rgb(225, 88, 75);
+}
+#icon-reddit .path2 {
+	fill: rgb(13, 38, 54);
+}
+
+#icon-quora .path1 {
+	fill: rgb(202, 70, 56);
+}
+#icon-quora .path2 {
+	fill: rgb(255, 255, 255);
+}
+
+.icon-udacity_name {
+	fill: aliceblue;
+	height: 32px;
+	max-width: 140px;
+	margin-right: .7em;
+}
+
+.icon-udacity_u {
+	fill: #F08C35;
+	height: 54px;
+	width: 54px;
+}
+
+.icon-udacity {
+	fill: aliceblue;
+	width: 48px;
+	height: 54px;
+}
+
+/*
+#icon-udacity {}
+#icon-udacity .path1 {}
+#icon-udacity .path2 {}
+*/
+
+.icon-github, .icon-github2 {
+	width: 44px;
+	height: 44px;
+	fill: aliceblue;
+}
+.icon-github:hover {
+	fill: #F08C35;
+}
+
+.icon-github2 {
+	visibility: hidden;
+}
+.icon-github2:hover {
+	visibility: visible;
+}
+
+.icon-heart {
+	padding: 4px 0;
+}
+
+.icon-heart-full {
+	fill: red;
+}
+
+.icon-increase, .icon-decrease {
+	height: 32px;
+	width: 32px;
+}
+
+/* main styles */
+
 html, body {
 	font-family: 'Open Sans', sans-serif;
 }
@@ -176,83 +247,9 @@ option {
 
 .post__icon {
 
-	fill: black;
+/*	fill: black;*/
 	width: 24px;
 	height: 24px;
-}
-
-#icon-reddit .path1 {
-	fill: rgb(225, 88, 75);
-}
-#icon-reddit .path2 {
-	fill: rgb(13, 38, 54);
-}
-
-#icon-quora .path1 {
-	fill: rgb(202, 70, 56);
-}
-#icon-quora .path2 {
-	fill: rgb(255, 255, 255);
-}
-
-.icon-udacity_name {
-	fill: aliceblue;
-	height: 32px;
-	max-width: 140px;
-	margin-right: .7em;
-}
-
-.icon-udacity_u {
-	fill: #F08C35;
-	height: 54px;
-	width: 54px;
-}
-
-.icon-udacity {
-	fill: aliceblue;
-	width: 48px;
-	height: 54px;
-}
-
-#icon-udacity {
-
-}
-#icon-udacity .path1 {
-
-}
-
-#icon-udacity .path2 {
-
-}
-
-.icon-github, .icon-github2 {
-	width: 44px;
-	height: 44px;
-	fill: aliceblue;
-}
-.icon-github:hover {
-	fill: #F08C35;
-}
-
-.icon-github2 {
-	visibility: hidden;
-}
-.icon-github2:hover {
-	visibility: visible;
-}
-
-.icon-heart {
-	padding: 4px 0;
-}
-
-.icon-heart-full {
-	fill: red;
-}
-
-.icon-increase, .icon-decrease {
-	height: 32px;
-	width: 32px;
-
 }
 
 .post__lifebar {

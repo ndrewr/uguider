@@ -44,13 +44,14 @@ Template.post_form.events({
 
 		var form = event.target;
 
-		console.log(event.target.url.value);
-		console.log(event.target.title.value);
 		Links.insert({
 			title: form.title.value,
 			url: form.url.value,
 			source: form.source.value,
-			date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
+
+//			date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
+			date_added: Date.parse(new Date()),
+
 			created_by: '?',
 			clicks: 0,
 			hp: 2
@@ -64,7 +65,7 @@ Template.post_form.events({
 Template.post_list.helpers({
 	post: function () {
 
-		return Links.find({}, {sort: {hp: -1}});
+		return Links.find({}, {sort: {hp: -1, date_added: -1}});
 	},
 
 	oneClickLabel: function () {
@@ -78,6 +79,10 @@ Template.post_list.helpers({
 
 	sourceIcon: function () {
 		return this.source.toLowerCase();
+	},
+
+	getDate: function () {
+		return moment(this.date_added).format('MMMM Do YYYY, h:mm:ss a');
 	}
 
 });
@@ -126,8 +131,12 @@ Template.lifebar.events({
 		var control = event.currentTarget.dataset.control;
 		if(control === 'up')
 			Links.update(this._id, {$inc: {hp: 1}});
-		else
+		// else check if hearts at 0
+		else if (this.hp - 1 === 0) {
+			Links.remove(this._id);
+		} else {
 			Links.update(this._id, {$inc: {hp: -1}});
+		}
 	}
 });
 

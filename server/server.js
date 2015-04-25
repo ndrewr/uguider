@@ -43,7 +43,8 @@ var getReddit = function (limit) {
 						url: reddit_thing.url,
 						source: 'Reddit',
 						reddit_id: reddit_thing.id,
-						date_added: moment(1000 * reddit_thing.created).format('MMMM Do YYYY, h:mm:ss a'),
+//						date_added: moment(1000 * reddit_thing.created).format('MMMM Do YYYY, h:mm:ss a'),
+						date_added: (1000 * reddit_thing.created),
 						created_by: 'U-Guider',
 						clicks: 0,
 						hp: 2
@@ -72,10 +73,11 @@ var getQuora = function () {
 						title: quora_result.question.text,
 						url: quora_result.question.href,
 						source: 'Quora',
-						date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
+//						date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
+						date_added: Date.parse(new Date()),
 						created_by: 'U-Guider',
 						clicks: 0,
-						hp: 2
+						hp: 2,
 					});
 				}
 			});
