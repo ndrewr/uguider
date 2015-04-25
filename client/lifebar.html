@@ -1,7 +1,7 @@
 <template name="lifebar">
 	<div class="post__lifebar">
 <!--		<span class="post__lifebar__label">LIFEBAR</span>-->
-		<button class="post__lifebar__control" data-control="down">
+		<button class="post__lifebar__control" data-control="down" {{downButtonDisable}}>
 			<svg class="post__icon icon-decrease"><use xlink:href="#icon-decrease"></use></svg>
 		</button>
 
@@ -15,7 +15,7 @@
 			<svg class="post__icon icon-heart {{#if thirdHeart}}icon-heart-full{{/if}}"><use xlink:href="#icon-heart"></use></svg>
 		</span>
 
-		<button class="post__lifebar__control" data-control="up" {{buttonDisable}}>
+		<button class="post__lifebar__control" data-control="up" {{upButtonDisable}}>
 			<svg class="post__icon icon-increase"><use xlink:href="#icon-increase"></use></svg>
 		</button>
 	</div>

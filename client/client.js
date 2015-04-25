@@ -34,6 +34,33 @@ var fetchMorePosts = function () {
 }
 window.addEventListener('scroll', fetchMorePosts);
 
+Template.post_form.helpers({
+
+});
+
+Template.post_form.events({
+	'submit form': function (event) {
+		event.preventDefault();
+
+		var form = event.target;
+
+		console.log(event.target.url.value);
+		console.log(event.target.title.value);
+		Links.insert({
+			title: form.title.value,
+			url: form.url.value,
+			source: form.source.value,
+			date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
+			created_by: '?',
+			clicks: 0,
+			hp: 2
+		});
+
+		form.url.value = '';
+		form.title.value = '';
+	}
+});
+
 Template.post_list.helpers({
 	post: function () {
 
@@ -52,6 +79,7 @@ Template.post_list.helpers({
 	sourceIcon: function () {
 		return this.source.toLowerCase();
 	}
+
 });
 
 Template.post_list.events({
@@ -69,6 +97,7 @@ Template.post_list.events({
 			spinner.stop();
 		}, 1500);
 	}
+
 });
 
 Template.lifebar.helpers({
@@ -82,23 +111,23 @@ Template.lifebar.helpers({
 	thirdHeart: function () {
 		return this.hp > 2;
 	},
-
-	buttonDisable: function () {
-		if (this.hp === 3) return "disabled";
+	upButtonDisable: function () {
+		if (this.hp > 2) return "disabled";
+	},
+	downButtonDisable: function () {
+		if (this.hp < 1) return "disabled";
 	}
 
 });
 
 Template.lifebar.events({
 	'click .post__lifebar__control': function (event) {
-		console.log('ya got me! target is %O', event.currentTarget.dataset.control);
 		// update target post's HP value in minimongo
 		var control = event.currentTarget.dataset.control;
 		if(control === 'up')
 			Links.update(this._id, {$inc: {hp: 1}});
 		else
 			Links.update(this._id, {$inc: {hp: -1}});
-
 	}
 });
 

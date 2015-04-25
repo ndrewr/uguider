@@ -1,0 +1,19 @@
+<template name="post_form">
+	<form>
+		<div class="form__container">
+<!--				<label class="form__label" for="url">url</label>-->
+				<input name="url" id="url" type="text" class="form__textbox" placeholder="  post url">
+
+<!--				<label class="form__label" for="title">title</label>-->
+				<input name="title" id="title" type="text" class="form__textbox" placeholder="  post title">
+
+			<select name="source">
+				<option value="Other" selected>Other</option>
+				<option value="Reddit">Reddit</option>
+				<option value="Quora">Quora</option>
+			</select>
+
+			<button type="submit" class="form__btn">DO IT</button>
+		</div>
+	</form>
+</template>
