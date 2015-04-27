@@ -44,7 +44,7 @@ var getReddit = function (limit) {
 						source: 'Reddit',
 						reddit_id: reddit_thing.id,
 //						date_added: moment(1000 * reddit_thing.created).format('MMMM Do YYYY, h:mm:ss a'),
-						date_added: (1000 * reddit_thing.created),
+						date_added: (1000 * reddit_thing.created), // reddit stores abbrev date; must multiply
 						created_by: 'U-Guider',
 						clicks: 0,
 						hp: 2

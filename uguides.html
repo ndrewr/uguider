@@ -2,7 +2,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>U-Guider</title>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700' rel='stylesheet' type='text/css'>
-	<script type="javascript" href="spin.min.js"></script>
+<!--	<script type="javascript" href="spin.min.js"></script>-->
 
 </head>
 
@@ -14,11 +14,15 @@
 
 		<h2><svg class="icon-udacity_name"><use xlink:href="#icon-udacity_name"></use></svg>
 			<svg class="icon-udacity_u"><use xlink:href="#icon-udacity_u"></use></svg>
-			<span>guider</span></h2>
+			<span>-guider</span></h2>
+		{{> loginButtons}}
 	</header>
 
 	<section class="main-container">
-		{{> post_form}}
+		{{#if currentUser}}
+			{{> post_form}}
+		{{/if}}
+
 		{{> post_list}}
 
 	</section>

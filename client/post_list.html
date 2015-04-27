@@ -3,9 +3,9 @@
 
 		{{#each post}}
 		<div class="post">
-
-			{{> lifebar}}
-
+			{{#if currentUser}}
+				{{> lifebar}}
+			{{/if}}
 <!--			<span class="post__source">{{source}}</span>-->
 			<svg class="post__source icon-{{sourceIcon}} post__icon"><use xlink:href="#icon-{{sourceIcon}}"></use></svg>
 			<div class="post__clicks {{#if clicks}} u-blue {{else}} u-orange {{/if}}">
