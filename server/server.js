@@ -15,7 +15,8 @@ var isUniqueResult = function (result, source) {
 			return Links.find({title: result.text}, {limit: 1}).count() ==0;
 
 		default:
-			return Links.find({title: result.title, url: result.url}, {limit: 1}).count() == 0;
+			// User-submitted posts...can only check url
+			return Links.find({url: result.url}, {limit: 1}).count() == 0;
 	}
 }
 
@@ -47,7 +48,8 @@ var getReddit = function (limit) {
 						date_added: (1000 * reddit_thing.created), // reddit stores abbrev date; must multiply
 						created_by: 'U-Guider',
 						clicks: 0,
-						hp: 2
+						hp: 2,
+						lastUpdatedBy: 'Admin'
 					});
 				}
 			});
@@ -78,6 +80,7 @@ var getQuora = function () {
 						created_by: 'U-Guider',
 						clicks: 0,
 						hp: 2,
+						lastUpdatedBy: 'Admin'
 					});
 				}
 			});

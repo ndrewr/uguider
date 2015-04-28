@@ -5,6 +5,8 @@ Aggregates links from various sources based on configured criteria.
 Each link has an associated Click Counter to alert Users to how many other Users have
 already followed that link. This is meant to free User to visit less trafficked links.
 
+Each post also carries a basic ranking system represented by hearts. More hearts floats to the top, zero hearts sink to the bottom. The same User cannot rank the same post (up or down) twice in a row.
+
 
 #Link Sources
 ===============================================================
@@ -28,21 +30,30 @@ udacity+nanodegree&time=month
 - add required packages
 	meteor add http
 	meteor add momentjs:moment
+	meteor add accounts-ui
+	meteor add pauli:accounts-linkedin
 - launch on local host:
 	meteor
 
 
 #TODOS
 ===============================================================
+- Post ranked by User disappears from immediate display, prolly because entry update does
+something weird?
+
+- More link sources
+
+- Better search queries on Reddit/Quora
+
 - Sort available links based on...
-	- Dated created?
+	- Date created?
 	- Number of clicks? (descending order?)
+	- heart Ranking?
 
-- add Accounts system with LinkedIn login
-
-- allow logged-in User to delete posts
+- how to handle posts ranked 0; Delete or simply hide?
 
 - allow logged-in User to post new links
 
 - allow User to alert Support about particular link?
 
+- responsiveness on diff devices

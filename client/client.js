@@ -116,7 +116,6 @@ Template.post_list.events({
 			spinner.stop();
 		}, 1500);
 	}
-
 });
 
 Template.lifebar.helpers({
@@ -130,11 +129,13 @@ Template.lifebar.helpers({
 	thirdHeart: function () {
 		return this.hp > 2;
 	},
+	// the helpers below determine if the rank btns display to user
+	// disables if score too high/too low or post's prev ranker is current user
 	upButtonDisable: function () {
-		if (this.hp > 2) return "disabled";
+		if (this.hp > 2 | Meteor.user().profile.firstName === this.lastUpdatedBy) return "disabled";
 	},
 	downButtonDisable: function () {
-		if (this.hp < 1) return "disabled";
+		if (this.hp < 1 | Meteor.user().profile.firstName === this.lastUpdatedBy) return "disabled";
 	}
 
 });
@@ -142,15 +143,17 @@ Template.lifebar.helpers({
 Template.lifebar.events({
 	'click .post__lifebar__control': function (event) {
 		// update target post's HP value in minimongo
-		var control = event.currentTarget.dataset.control;
-		if(control === 'up')
-			Links.update(this._id, {$inc: {hp: 1}});
-		// else check if hearts at 0
-		else if (this.hp - 1 === 0) {
-			Links.remove(this._id);
-		} else {
-			Links.update(this._id, {$inc: {hp: -1}});
-		}
+		var control = event.currentTarget.dataset.control,
+				current_user = Meteor.user().profile.firstName;
+			if(control === 'up')
+				Links.update(this._id, {$inc: {hp: 1}, $set: {lastUpdatedBy: current_user}});
+// else check if hearts at 0; CURRENTLY REMOVED BEHAVIOR
+//			else if (this.hp - 1 === 0) {
+//				Links.remove(this._id);
+//			}
+			else {
+				Links.update(this._id, {$inc: {hp: -1}, $set: {lastUpdatedBy: current_user}});
+			}
 	}
 });
 
