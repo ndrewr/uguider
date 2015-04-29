@@ -7,9 +7,7 @@
 meteor-platform
 http
 momentjs:moment
-meteorhacks:npm
 
 
-npm-container
 pauli:accounts-linkedin
 accounts-ui
