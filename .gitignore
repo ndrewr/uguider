@@ -1,6 +1,6 @@
 .DS_Store
 node_modules/
-.meteor/
+.meteor/local
 packages/
 
 # Don't track build output
