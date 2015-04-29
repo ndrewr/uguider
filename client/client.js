@@ -1,14 +1,17 @@
 // Client
+// this autorun implements lazier loading behaviour
 var LINKS_INCREMENT = 10;
 Session.setDefault('links_limit', LINKS_INCREMENT);
 Deps.autorun(function () {
 	Meteor.subscribe('links', Session.get('links_limit'));
 });
 
+// whenever no user logged in clear name from display
 Deps.autorun(function () {
 	if(!Meteor.userId())
 	{
 		// elem may not exist yet...created on login attempt
+		// if null, then great. nothing needs to be done
 		var login_name_elem = document.querySelector('.login-name');
 		if (login_name_elem) {
 			document.querySelector('.login-name').textContent = '';
@@ -87,19 +90,26 @@ Template.post_form.events({
 });
 
 Template.post_list.helpers({
+	// feed post-list with posts avail to display
+	// prob: ranking doesn't trigger refresh in list display
+	// qed: oops, forgot to sort on this end...obvious fix obvious result
 	post: function () {
-		return Links.find({});
+		return Links.find({}, { sort: {hp: -1, date_added: -1} });
 	},
 	oneClickLabel: function () {
 		return this.clicks === 1;
 	},
 	// control visibility of 'load links' btn
 	moreLinks: function () {
+		// compared against stored session data which will always be >=
+		// since fetched postson client side can't exceed links_limit
 		return !(Links.find().count() < Session.get("links_limit"));
 	},
+	// determines source icon in post
 	sourceIcon: function () {
 		return this.source.toLowerCase();
 	},
+	// takes raw data in ms and formats to human readable date
 	getDate: function () {
 		return moment(this.date_added).format('MMMM Do YYYY, h:mm:ss a');
 	}
@@ -116,6 +126,7 @@ Template.post_list.events({
 		target.querySelector('span').style.opacity = 0;
 		target.appendChild(spinner.el);
 		setTimeout(function () {
+			// updating this value triggers autorun; display 'reactively' fetches more posts
 			Session.set('links_limit', Session.get('links_limit') + LINKS_INCREMENT);
 			spinner.stop();
 		}, 1500);
