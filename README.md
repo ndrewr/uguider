@@ -1,6 +1,6 @@
 #U-Guider
 ===============================================================
-Aggregates links from various sources based on configured criteria.
+Aggregates links from various sources based on configured criteria. Logged-in users can post new links.
 
 Each link has an associated Click Counter to alert Users to how many other Users have
 already followed that link. This is meant to free User to visit less trafficked links.
@@ -38,10 +38,10 @@ udacity+nanodegree&time=month
 
 #TODOS
 ===============================================================
-- Post ranked by User disappears from immediate display, prolly because entry update does
-something weird?
-
 - More link sources
+	- Stack overflow?
+	- Yahoo questions?
+	- Google scrape?
 
 - Better search queries on Reddit/Quora
 
@@ -52,10 +52,6 @@ something weird?
 
 - how to handle posts ranked 0; Delete or simply hide?
 
-- allow logged-in User to post new links
-
 - allow User to alert Support about particular link?
 
 - responsiveness on diff devices
-
-- still INSECURE
