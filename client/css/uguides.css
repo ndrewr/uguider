@@ -151,11 +151,21 @@ option {
 	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));
 }
 
-.header__about {
+header button {
 	position: absolute;
-	right: 1em;
 	border: 1px solid #464f75;
-/*	border: 1px solid aliceblue;*/
+	background-color: #294860;
+	color: aliceblue;
+/*
+	box-shadow: 1px 3px 0px 1px #092840;
+	transition: all .2s linear;
+*/
+}
+
+.header__about {
+/*	position: absolute;*/
+	right: 1em;
+/*	border: 1px solid #464f75;*/
 	background-color: #294860;
 	color: aliceblue;
 	box-shadow: 1px 3px 0px 1px #092840;
@@ -166,6 +176,24 @@ option {
 	background-color: #092840;
 	transform: translate(1px, 2px);
 	box-shadow: 0px 1px 0 1px #092840;
+}
+
+.header__postform {
+	left: 1em;
+	box-shadow: 1px 4px 0px 1px #092840;
+	transition: all .2s linear;
+}
+
+.header__postform-pressed {
+	background-color: #F3F3F3;
+	color: #294860;
+	transform: translate(1px, 2px);
+	box-shadow: 1px 2px 0px 1px #092840;
+}
+
+.header__postform:active {
+	transform: translate(1px, 2px);
+	box-shadow: 0px 2px 0 1px #092840;
 }
 
 .main-container {
@@ -232,10 +260,12 @@ option {
 	padding-bottom: .5em;
 }
 
+/*
 .post__info-sig span {
 	position: absolute;
 
 }
+*/
 
 .post__source {
 /*	position: absolute;
@@ -297,6 +327,19 @@ option {
 	min-width: 20em;
 	max-width: 40em;
 	margin: 1em auto;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: space-between;
+	justify-content: space-between;
+
+	transition: all .5s;
+}
+
+.form__container-hidden {
+	height: 10px;
+}
+
+.form__container select {
 
 }
 
@@ -316,7 +359,8 @@ option {
 
 .form__textbox {
 	display: inline-block;
-	width: 15em;
+	width: 80%;
+	max-width: 15em;
 	border-radius: 1em;
 	padding: .2em .5em;
 	font-weight: 300;
@@ -378,7 +422,8 @@ option {
 	overflow-y: scroll;
 	border: 2px solid aliceblue;
 	border-radius: .5em;
-/*	display: none;*/
+	max-height: 80%;
+	/*	display: none;*/
 }
 
 .about__container button {
@@ -396,6 +441,62 @@ option {
 	color: #294860;
 }
 
-.about__container p {
+/* RESPONSIVE CSS media queries
+--------------------------------------------------
+/* For smaller screens, map and list sections overlap.
+List section slides in and out of view as needed */
+/* iphone6/ nexus5 screen considered baseline width*/
+@media only screen and (max-width: 600px) {
+	.post {
+		width: 95%;
+	}
+
+	.post__title {
+		font-size: .9em;
+		margin-left: 3em;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+
+	.about__container {
+
+	}
+
+	.post {
+		width: 90%;
+	}
+
+	.post__clicks {
+	}
+
+	.post__clicks-count {
+		font-size: 5em;
+	}
+
+	.post__title {
+		font-size: 1em;
+
+	}
+
+	.post__info {
+
+	}
+
+	.post__info-sig {
+
+		right: 1em;
+		font-size: .6em;
+	}
+
+	.form__container {
+		flex-flow: column;
+		align-items: center;
+		height: 10em;
+	}
+
+	.form__btn {
+		margin: 0 auto;
+	}
 
 }

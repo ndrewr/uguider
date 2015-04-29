@@ -9,21 +9,23 @@
 <body>
 	{{> svg_defs}}
 	<header>
-
-<!--		<svg class="icon-udacity"><use xlink:href="#icon-udacity"></use></svg>-->
-
 		<h2><svg class="icon-udacity_name"><use xlink:href="#icon-udacity_name"></use></svg>
 			<svg class="icon-udacity_u"><use xlink:href="#icon-udacity_u"></use></svg>
 			<span>-guider</span></h2>
 		{{> loginButtons}}
 		<button class="header__about">?</button>
+		{{#if currentUser}}
+			<button class="header__postform {{#if showPostform}}header__postform-pressed{{/if}}">P</button>
+		{{/if}}
 	</header>
 	{{#if showAbout}}
 		{{> about_modal}}
 	{{/if}}
 	<section class="main-container">
 		{{#if currentUser}}
-			{{> post_form}}
+			{{#if showPostform}}
+				{{> post_form}}
+			{{/if}}
 		{{/if}}
 
 		{{> post_list}}

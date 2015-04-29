@@ -181,6 +181,8 @@ Template.about_modal.events({
 });
 
 Session.setDefault('about_visible', false);
+Session.setDefault('postform_visible', true);
+
 Template.body.events({
 	'click .header__about': function () {
 		var about_modal = document.querySelector('.about__container');
@@ -191,11 +193,22 @@ Template.body.events({
 //			about_modal.style.display = 'inherit';
 			Session.set('about_visible', true);
 		}
+	},
+
+	'click .header__postform': function () {
+		if (Session.get('postform_visible')) {
+			Session.set('postform_visible', false);
+		}	else {
+			Session.set('postform_visible', true);
+		}
 	}
 });
 
 Template.body.helpers({
 	showAbout: function () {
 		return Session.get('about_visible');
+	},
+	showPostform: function () {
+		return Session.get('postform_visible');
 	}
 });
