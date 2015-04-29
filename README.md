@@ -57,3 +57,5 @@ something weird?
 - allow User to alert Support about particular link?
 
 - responsiveness on diff devices
+
+- still INSECURE

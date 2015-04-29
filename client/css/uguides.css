@@ -84,6 +84,7 @@ html, body {
 }
 
 header, footer {
+	position: relative;
 	width: 100%;
 	background-color: #294860;
 	color: aliceblue;
@@ -150,6 +151,23 @@ option {
 	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));
 }
 
+.header__about {
+	position: absolute;
+	right: 1em;
+	border: 1px solid #464f75;
+/*	border: 1px solid aliceblue;*/
+	background-color: #294860;
+	color: aliceblue;
+	box-shadow: 1px 3px 0px 1px #092840;
+	transition: all .2s linear;
+}
+
+.header__about:active {
+	background-color: #092840;
+	transform: translate(1px, 2px);
+	box-shadow: 0px 1px 0 1px #092840;
+}
+
 .main-container {
 	width: 100%;
 
@@ -189,7 +207,7 @@ option {
 }
 
 .post__clicks-count {
-	font-size: 6.5em;
+	font-size: 5em;
 }
 
 .post__title {
@@ -346,3 +364,38 @@ option {
 	text-decoration: none !important;
 }
 
+.about__container {
+	position: absolute;
+	z-index: 2;
+	padding: 1.5em;
+	background-color: #294860;
+	color: aliceblue;
+	opacity: .97;
+	width: 70%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow-y: scroll;
+	border: 2px solid aliceblue;
+	border-radius: .5em;
+/*	display: none;*/
+}
+
+.about__container button {
+	position: absolute;
+	padding: .5em;
+	right: .5em;
+	background-color: #294860;
+	color: aliceblue;
+	font-size: .8em;
+	font-weight: 300;
+}
+
+.about__container button:hover {
+	background-color: aliceblue;
+	color: #294860;
+}
+
+.about__container p {
+
+}

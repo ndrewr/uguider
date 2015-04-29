@@ -40,9 +40,12 @@ var fetchMorePosts = function () {
 		}
 	}
 }
-window.addEventListener('scroll', fetchMorePosts);
+window.addEventListener('scroll', fetchMorePosts); // debounce for perf?
 
 // login customization
+// this code chunk just displays user's name after login
+// Making it work with accounts-ui template which seems to use innerHtml func
+// to raze n replace content each time. thus I need to recreate this node each time?
 Accounts.onLogin(function () {
 	var login_name_elem = document.querySelector('.login-name');
 	if(!login_name_elem) {
@@ -65,16 +68,18 @@ Template.post_form.events({
 		event.preventDefault();
 
 		var form = event.target;
-		Links.insert({
-			title: form.title.value,
-			url: form.url.value,
-			source: form.source.value,
-//			date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
-			date_added: Date.parse(new Date()),
-			created_by: '?',
-			clicks: 0,
-			hp: 2
-		});
+		Meteor.call('insertPost', form.title.value, form.url.value, form.source.value, Meteor.user().profile.firstName);
+
+//		Links.insert({
+//			title: form.title.value,
+//			url: form.url.value,
+//			source: form.source.value,
+//			date_added: Date.parse(new Date()),
+//			created_by: '?',
+//			clicks: 0,
+//			hp: 2
+//		});
+
 		// reset form fields
 		form.url.value = '';
 		form.title.value = '';
@@ -83,8 +88,7 @@ Template.post_form.events({
 
 Template.post_list.helpers({
 	post: function () {
-
-		return Links.find({}, {sort: {hp: -1, date_added: -1}});
+		return Links.find({});
 	},
 	oneClickLabel: function () {
 		return this.clicks === 1;
@@ -103,7 +107,7 @@ Template.post_list.helpers({
 
 Template.post_list.events({
 	'click .post a': function () {
-		Links.update(this._id, {$inc: {clicks: 1}});
+		Meteor.call('updateClicks', this._id);
 	},
 	// load more results on click; uses spin.js on 1.5s delay
 	'click #morePostsAvailable': function () {
@@ -145,16 +149,42 @@ Template.lifebar.events({
 		// update target post's HP value in minimongo
 		var control = event.currentTarget.dataset.control,
 				current_user = Meteor.user().profile.firstName;
-			if(control === 'up')
-				Links.update(this._id, {$inc: {hp: 1}, $set: {lastUpdatedBy: current_user}});
+			if(control === 'up') {
+				Meteor.call('updateRank', this._id, 1, current_user);
+			}
 // else check if hearts at 0; CURRENTLY REMOVED BEHAVIOR
 //			else if (this.hp - 1 === 0) {
 //				Links.remove(this._id);
 //			}
 			else {
-				Links.update(this._id, {$inc: {hp: -1}, $set: {lastUpdatedBy: current_user}});
+				Meteor.call('updateRank', this._id, -1, current_user);
 			}
 	}
 });
 
+Template.about_modal.events({
+	'click button': function (event) {
+//		document.querySelector('.about__container').style.display = 'none';
+		Session.set('about_visible', false);
+	}
+});
 
+Session.setDefault('about_visible', false);
+Template.body.events({
+	'click .header__about': function () {
+		var about_modal = document.querySelector('.about__container');
+		if (Session.get('about_visible')) {
+//			about_modal.style.display = 'none';
+			Session.set('about_visible', false);
+		}	else {
+//			about_modal.style.display = 'inherit';
+			Session.set('about_visible', true);
+		}
+	}
+});
+
+Template.body.helpers({
+	showAbout: function () {
+		return Session.get('about_visible');
+	}
+});

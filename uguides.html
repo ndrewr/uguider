@@ -16,8 +16,11 @@
 			<svg class="icon-udacity_u"><use xlink:href="#icon-udacity_u"></use></svg>
 			<span>-guider</span></h2>
 		{{> loginButtons}}
+		<button class="header__about">?</button>
 	</header>
-
+	{{#if showAbout}}
+		{{> about_modal}}
+	{{/if}}
 	<section class="main-container">
 		{{#if currentUser}}
 			{{> post_form}}

@@ -1,7 +1,37 @@
 // server.js
+// methods
+Meteor.methods({
+	'insertPost': function (title, url, source, user) {
+		// check if the link is already shared
+		if(isUniqueResult(url, 'Other')) {
+			Links.insert({
+				title: title,
+				url: url,
+				source: source,
+				date_added: Date.parse(new Date()), // reddit stores abbrev date; must multiply
+				created_by: user,
+				clicks: 0,
+				hp: 2,
+				lastUpdatedBy: 'Admin'
+			});
+		}
+		else {
+			console.log('This link has already been posted!');
+		}
+	},
+// currently unneeded as posts don't get deleted from client
+//	'removePost': function () {},
+	'updateRank': function (postId, value, updater) {
+		Links.update(postId, {$inc: {hp: value}, $set: {lastUpdatedBy: updater}});
+	},
+	'updateClicks': function (postId) {
+		Links.update(postId, {$inc: {clicks: 1}});
+	}
+});
+
 // pubs
 Meteor.publish('links', function (limit) {
-	return Links.find({}, { limit: limit });
+	return Links.find({}, { limit: limit , sort: {hp: -1, date_added: -1}});
 });
 
 var isUniqueResult = function (result, source) {
@@ -16,7 +46,7 @@ var isUniqueResult = function (result, source) {
 
 		default:
 			// User-submitted posts...can only check url
-			return Links.find({url: result.url}, {limit: 1}).count() == 0;
+			return Links.find({url: result}, {limit: 1}).count() == 0;
 	}
 }
 
