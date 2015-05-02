@@ -73,16 +73,6 @@ Template.post_form.events({
 		var form = event.target;
 		Meteor.call('insertPost', form.title.value, form.url.value, form.source.value, Meteor.user().profile.firstName);
 
-//		Links.insert({
-//			title: form.title.value,
-//			url: form.url.value,
-//			source: form.source.value,
-//			date_added: Date.parse(new Date()),
-//			created_by: '?',
-//			clicks: 0,
-//			hp: 2
-//		});
-
 		// reset form fields
 		form.url.value = '';
 		form.title.value = '';
@@ -175,7 +165,6 @@ Template.lifebar.events({
 
 Template.about_modal.events({
 	'click button': function (event) {
-//		document.querySelector('.about__container').style.display = 'none';
 		Session.set('about_visible', false);
 	}
 });
@@ -210,5 +199,24 @@ Template.body.helpers({
 	},
 	showPostform: function () {
 		return Session.get('postform_visible');
+	},
+	serverUpdateTime: function () {
+		console.log('getting server time');
+		return Session.get('server_time');
+//	Meteor.call('getUpdateTime', function (error, result) {
+//			if (!error)
+//				Session.set('server_time', result);
+//		});
 	}
+});
+
+Meteor.startup(function () {
+	Meteor.setInterval(function () {
+//		Meteor.call('getUpdateTime');
+		Meteor.call('getUpdateTime', function (error, result) {
+			if (!error)
+				Session.set('server_time', result);
+		});
+	}, 12 * 360 * 1000);
+
 });

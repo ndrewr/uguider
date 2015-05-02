@@ -41,25 +41,13 @@
 	height: 54px;
 }
 
-/*
-#icon-udacity {}
-#icon-udacity .path1 {}
-#icon-udacity .path2 {}
-*/
-
 .icon-github, .icon-github2 {
 	width: 44px;
 	height: 44px;
 	fill: aliceblue;
 	margin-top: 1em;
 }
-.icon-github:hover {
-	fill: #F08C35;
-}
 
-.icon-github2 {
-
-}
 .icon-github2:hover {
 	fill: #F08C35;
 }
@@ -96,19 +84,24 @@ header {
 	box-shadow: -2px 1px 4px 3px #888;
 }
 
-header h2 {
-	margin: 0em;
+h2 {
+	margin: 0;
 	padding: .5em;
 }
 
-header h2 span {
+h2 span {
 	font-weight: 300;
 	vertical-align: 10px;
 }
 
 footer {
-	height: 5em;
+	min-height: 6em;
 	text-align: center;
+}
+
+.server-time {
+	margin: 0;
+	font-weight: 300;
 }
 
 a {
@@ -168,19 +161,19 @@ header button {
 /*	border: 1px solid #464f75;*/
 	background-color: #294860;
 	color: aliceblue;
-	box-shadow: 1px 3px 0px 1px #092840;
+	box-shadow: 1px 3px 0 1px #092840;
 	transition: all .2s linear;
 }
 
 .header__about:active {
 	background-color: #092840;
 	transform: translate(1px, 2px);
-	box-shadow: 0px 1px 0 1px #092840;
+	box-shadow: 0 1px 0 1px #092840;
 }
 
 .header__postform {
 	left: 1em;
-	box-shadow: 1px 4px 0px 1px #092840;
+	box-shadow: 1px 4px 0 1px #092840;
 	transition: all .2s linear;
 }
 
@@ -188,17 +181,16 @@ header button {
 	background-color: #F3F3F3;
 	color: #294860;
 	transform: translate(1px, 2px);
-	box-shadow: 1px 2px 0px 1px #092840;
+	box-shadow: 1px 2px 0 1px #092840;
 }
 
 .header__postform:active {
 	transform: translate(1px, 2px);
-	box-shadow: 0px 2px 0 1px #092840;
+	box-shadow: 0 2px 0 1px #092840;
 }
 
 .main-container {
 	width: 100%;
-
 }
 
 .post-list {
@@ -248,10 +240,6 @@ header button {
 	text-overflow: ellipsis;
 }
 
-.post__info {
-
-}
-
 .post__info-sig {
 	position: absolute;
 	right: 1em;
@@ -260,23 +248,10 @@ header button {
 	padding-bottom: .5em;
 }
 
-/*
-.post__info-sig span {
-	position: absolute;
-
-}
-*/
-
 .post__source {
-/*	position: absolute;
-	top: 0;
-	right: 0;
-*/
-
 	float: left;
 	margin-left: 3em;
-/*	padding: .2em;*/
-/*	font-size: 1.1em;*/
+
 }
 
 #morePostsAvailable {
@@ -300,8 +275,6 @@ header button {
 }
 
 .post__icon {
-
-/*	fill: black;*/
 	width: 24px;
 	height: 24px;
 }
@@ -310,16 +283,6 @@ header button {
 	float: right;
 	font-size: .5em;
 	margin: auto 0;
-}
-
-/*
-.post__lifebar__label {
-
-}
-*/
-
-.post__lifebar__control {
-
 }
 
 .form__container {
@@ -338,19 +301,6 @@ header button {
 .form__container-hidden {
 	height: 10px;
 }
-
-.form__container select {
-
-}
-
-/*
-.form__group {
-	width: 20em;
-	margin: 0 auto;
-	display: block;
-	padding: .5em;
-}
-*/
 
 .form__label {
 	display: inline-block;
@@ -381,14 +331,6 @@ header button {
 		background-color: #E07C25;
 	transform: translate(2px, 2px);
 	box-shadow: 0px 1px 0 1px #D07C33;
-
-}
-
-.login-text-and-button {
-
-}
-
-.login-display-name {
 
 }
 
@@ -459,15 +401,8 @@ List section slides in and out of view as needed */
 
 @media only screen and (max-width: 800px) {
 
-	.about__container {
-
-	}
-
 	.post {
 		width: 90%;
-	}
-
-	.post__clicks {
 	}
 
 	.post__clicks-count {
@@ -476,10 +411,6 @@ List section slides in and out of view as needed */
 
 	.post__title {
 		font-size: 1em;
-
-	}
-
-	.post__info {
 
 	}
 

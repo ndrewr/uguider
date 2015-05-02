@@ -1,4 +1,11 @@
 // server.js
+var lastUpdateTime = 'clock';
+
+var updateTime = function () {
+	lastUpdateTime = moment().format('MMMM Do YYYY, h:mm:ss a');
+	console.log(lastUpdateTime);
+}
+
 // methods
 Meteor.methods({
 	'insertPost': function (title, url, source, user) {
@@ -26,6 +33,9 @@ Meteor.methods({
 	},
 	'updateClicks': function (postId) {
 		Links.update(postId, {$inc: {clicks: 1}});
+	},
+	'getUpdateTime': function () {
+		return lastUpdateTime;
 	}
 });
 
@@ -37,7 +47,7 @@ Meteor.publish('links', function (limit) {
 var isUniqueResult = function (result, source) {
 	switch (source) {
 		case 'Reddit':
-			//Links.findOne({id: result.id});
+			//Links.findOne({id: result.id}); // this statement returns actual document; not what I want
 			return Links.find({reddit_id: result.id}, {limit: 1}).count() == 0;
 
 		case 'Quora':
@@ -74,7 +84,6 @@ var getReddit = function (limit) {
 						url: reddit_thing.url,
 						source: 'Reddit',
 						reddit_id: reddit_thing.id,
-//						date_added: moment(1000 * reddit_thing.created).format('MMMM Do YYYY, h:mm:ss a'),
 						date_added: (1000 * reddit_thing.created), // reddit stores abbrev date; must multiply
 						created_by: 'U-Guider',
 						clicks: 0,
@@ -89,8 +98,7 @@ var getReddit = function (limit) {
 
 // currently scrapes Quora with Kimono...can set url on kimono api to check for 'time=day' updates
 // udacity nanodegree ... better results than udacity+nano
-// udacity degree
-// udacity certificate
+// ideas: udacity degree, udacity certificate
 var getQuora = function () {
 	//use kimono api
 	var url = 'https://www.kimonolabs.com/api/8in7xz24?apikey=NItZalq5HdOgu1YN5C4AkAWFe7OMGzn0';
@@ -133,37 +141,20 @@ var getQuora = function () {
 
 };
 
-// check every hr for new posts
+// check every 12 hrs for new posts
 Meteor.setInterval(function () {
 	getReddit();
 	getQuora();
-}, 360 * 1000);
+	updateTime();
+}, 12 * 360 * 1000);
 									 
 Meteor.startup(function () {
 	// code to run on server at startup
-	if (Links.find().count() === 0) {
-		// test results
-//		Links.insert({
-//			title: 'Udacity Home',
-//			url: 'http://udacity.com',
-//			source: 'Other',
-//			date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
-//			created_by: 'Andrew R',
-//			clicks: 0,
-//			hp:3
-//		}),
-//
-//			Links.insert({
-//			title: 'Reddit Search | Udacity Degree',
-//			url: 'http://www.reddit.com/search?q=udacity+degree&restrict_sr=off&sort=new&t=all&limit=20',
-//			source: 'Reddit',
-//			date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
-//			created_by: 'Andrew R',
-//			clicks: 0
-//		});
-	}
+	// this check is meant only for initial post seeding
+//	if (Links.find().count() === 0) {}
 
 	getReddit(20);
 	getQuora();
-
+//	lastUpdateTime = moment().format('MMMM Do YYYY, h:mm:ss a');
+	updateTime();
 });

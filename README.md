@@ -32,6 +32,8 @@ udacity+nanodegree&time=month
 	meteor add momentjs:moment
 	meteor add accounts-ui
 	meteor add pauli:accounts-linkedin
+	OR just
+	meteor add http momentjs:moment accounts-ui pauli:accounts-linkedin
 - launch on local host:
 	meteor
 
@@ -55,3 +57,9 @@ udacity+nanodegree&time=month
 - allow User to alert Support about particular link?
 
 - responsiveness on diff devices
+
+- whats an 'Error Handling"??
+
+- How to let User know they have already visited a link?
+
+- Last server update info
