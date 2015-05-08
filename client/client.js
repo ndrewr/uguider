@@ -1,4 +1,29 @@
 // Client
+// considering using local storage to check for visited links
+// alternative is to create new data field on server, a list of Users who clicked a post
+//function initStorage() {
+//	window.storage = {
+//		set: function(key, value) {
+//			if (!key || !value) {return;}
+//
+//			if (typeof value === "object") {
+//				value = JSON.stringify(value);
+//			}
+//			localStorage.setItem(key, value);
+//		},
+//		get: function(key) {
+//			var value = localStorage.getItem(key);
+//
+//			if (!value) {return;}
+//
+//			value = JSON.parse(value);
+//			return value;
+//		}
+//	}
+//	localStorage.setItem('saved_list', test_data);
+//}
+
+
 // this autorun implements lazier loading behaviour
 var LINKS_INCREMENT = 10;
 Session.setDefault('links_limit', LINKS_INCREMENT);
@@ -18,6 +43,11 @@ Deps.autorun(function () {
 		}
 	}
 })
+
+var getUsername = function () {
+	var profile = Meteor.user().profile;
+	return profile.firstName + ' ' + profile.lastName;
+}
 
 var fetchMorePosts = function () {
 	var threshold,
@@ -50,6 +80,9 @@ window.addEventListener('scroll', fetchMorePosts); // debounce for perf?
 // Making it work with accounts-ui template which seems to use innerHtml func
 // to raze n replace content each time. thus I need to recreate this node each time?
 Accounts.onLogin(function () {
+
+			console.log(getUsername());
+
 	var login_name_elem = document.querySelector('.login-name');
 	if(!login_name_elem) {
 		// not created yet. create now
@@ -102,12 +135,18 @@ Template.post_list.helpers({
 	// takes raw data in ms and formats to human readable date
 	getDate: function () {
 		return moment(this.date_added).format('MMMM Do YYYY, h:mm:ss a');
+	},
+	// checks if user already clicked on this link
+	clickedByUser: function () {
+//		return this.clickers && this.clickers.indexOf(getUsername());
+		return this.clickers && (this.clickers.indexOf(getUsername()) !== -1);
 	}
 });
 
 Template.post_list.events({
 	'click .post a': function () {
-		Meteor.call('updateClicks', this._id);
+		// update list of clickers here or on server?
+		Meteor.call('updateClicks', this._id, getUsername());
 	},
 	// load more results on click; uses spin.js on 1.5s delay
 	'click #morePostsAvailable': function () {
@@ -201,18 +240,17 @@ Template.body.helpers({
 		return Session.get('postform_visible');
 	},
 	serverUpdateTime: function () {
-		console.log('getting server time');
 		return Session.get('server_time');
-//	Meteor.call('getUpdateTime', function (error, result) {
-//			if (!error)
-//				Session.set('server_time', result);
-//		});
 	}
 });
 
 Meteor.startup(function () {
+	Meteor.call('getUpdateTime', function (error, result) {
+		if (!error)
+			Session.set('server_time', result);
+	});
 	Meteor.setInterval(function () {
-//		Meteor.call('getUpdateTime');
+//	currently runs every twelve hrs
 		Meteor.call('getUpdateTime', function (error, result) {
 			if (!error)
 				Session.set('server_time', result);

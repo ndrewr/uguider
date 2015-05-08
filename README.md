@@ -41,11 +41,14 @@ udacity+nanodegree&time=month
 #TODOS
 ===============================================================
 - More link sources
-	- Stack overflow?
-	- Yahoo questions?
+	- Stack overflow? issue: few questions and style of open/close q&a style
+	- Yahoo questions? issue: barely any questions
 	- Google scrape?
+		- '-site:udacity.com -site:quora.com forum AND udacity AND *degree'
 
 - Better search queries on Reddit/Quora
+	- added two mo scrapes for Quora checking 'degree' & 'certif' with 'udacity'
+	- considerably more results...note checking 'cert' stops a those 4 letters = worse results
 
 - Sort available links based on...
 	- Date created?
@@ -60,6 +63,4 @@ udacity+nanodegree&time=month
 
 - whats an 'Error Handling"??
 
-- How to let User know they have already visited a link?
-
-- Last server update info
+- Normalizing urls for comparisons

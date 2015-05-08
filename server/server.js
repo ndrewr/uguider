@@ -31,8 +31,9 @@ Meteor.methods({
 	'updateRank': function (postId, value, updater) {
 		Links.update(postId, {$inc: {hp: value}, $set: {lastUpdatedBy: updater}});
 	},
-	'updateClicks': function (postId) {
-		Links.update(postId, {$inc: {clicks: 1}});
+	'updateClicks': function (postId, username) {
+//		Links.update(postId, {$inc: {clicks: 1}});
+		Links.update(postId, {$inc: {clicks: 1}, $addToSet: {clickers: username}});
 	},
 	'getUpdateTime': function () {
 		return lastUpdateTime;
@@ -113,7 +114,6 @@ var getQuora = function () {
 						title: quora_result.question.text,
 						url: quora_result.question.href,
 						source: 'Quora',
-//						date_added: moment().format('MMMM Do YYYY, h:mm:ss a'),
 						date_added: Date.parse(new Date()),
 						created_by: 'U-Guider',
 						clicks: 0,
@@ -124,22 +124,25 @@ var getQuora = function () {
 			});
 		}
 	});
+};
 
-// scrape google using npm module
-//	var query_string = 'site:quora.com udacity "nano*" OR degree OR mooc-degree';
+//var getGoogle = function () {
+// // scrape google using npm module
+////	var query_string = 'site:quora.com udacity "nano*" OR degree OR mooc-degree';
+//	var query_string = 'site:quora.com intitle:udacity nanodegree or *degree';
 //	var searchAPI = Meteor.npmRequire('google');
 //	searchAPI.resultsPerPage = 25;
 //	searchAPI(query_string, function (err, next, links){
 //		if (err) console.error('Uh-oh...got bad news: %s', err);
-//
-////		links.forEach(function(link) {
-////			console.log('here is the link structure itself: %O', link);
-////			console.log(link.title + ' - ' + link.link); // link.href is an alias for link.link
-////			console.log(link.description + "\n");
-////		});
+//		else {
+//			links.forEach(function(link) {
+//				console.log('here is the link structure itself: %O', link);
+//				console.log(link.title + ' - ' + link.link); // link.href is an alias for link.link
+//				console.log(link.description + "\n");
+//			});
+//		}
 //	});
-
-};
+//};
 
 // check every 12 hrs for new posts
 Meteor.setInterval(function () {
@@ -153,6 +156,7 @@ Meteor.startup(function () {
 	// this check is meant only for initial post seeding
 //	if (Links.find().count() === 0) {}
 
+//	getGoogle();
 	getReddit(20);
 	getQuora();
 //	lastUpdateTime = moment().format('MMMM Do YYYY, h:mm:ss a');

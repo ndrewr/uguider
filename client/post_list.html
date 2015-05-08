@@ -12,6 +12,7 @@
 					{{clicks}}
 				</span>
 				<p>{{#if oneClickLabel}} CLICK {{else}} CLICKS {{/if}}</p>
+<!--				{{#if clickedByUser}}<p class="post__clicks-clicked">visited</p>{{/if}}-->
 			</div>
 			<div class="post__info">
 				<h3 class="post__title">
@@ -20,6 +21,8 @@
 				<span class="post__info-sig">added {{getDate}} by {{created_by}}</span>
 
 			</div>
+			{{#if clickedByUser}}<p class="post__clicks-clicked post__corner-ribbon">visited</p>{{/if}}
+
 		</div>
 
 		<hr class="hr-style">

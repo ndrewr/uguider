@@ -13,9 +13,9 @@
 			<svg class="icon-udacity_u"><use xlink:href="#icon-udacity_u"></use></svg>
 			<span>-guider</span></h2>
 		{{> loginButtons}}
-		<button class="header__about">?</button>
+		<button class="header__about"><span class="header__btn-text">?</span></button>
 		{{#if currentUser}}
-			<button class="header__postform {{#if showPostform}}header__postform-pressed{{/if}}">P</button>
+		<button class="header__postform {{#if showPostform}}header__postform-pressed{{/if}}"><span class="header__btn-text">P</span></button>
 		{{/if}}
 	</header>
 	{{#if showAbout}}
